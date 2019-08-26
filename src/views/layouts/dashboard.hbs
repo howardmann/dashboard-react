@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dashboard App</title>
+  <style>
+    #sidebar-wrapper {
+      min-height: 100vh;
+      margin-left: -150px;
+      -webkit-transition: margin .25s ease-out;
+      -moz-transition: margin .25s ease-out;
+      -o-transition: margin .25s ease-out;
+      transition: margin .25s ease-out;
+    }
+
+    #sidebar-wrapper #sidebar-list {
+      width: 150px;
+    }
+
+    #page-content-wrapper {
+      min-width: 100vw;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: 0;
+    }
+
+    @media (min-width: 768px) {
+      #sidebar-wrapper {
+        margin-left: 0;
+      }
+
+      #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+      }
+
+      #wrapper.toggled #sidebar-wrapper {
+        margin-left: -150px;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="http://scmarketing.surge.sh/css/scmarketing.min.css">
+</head>
+<body>
+  <div id="header" class="row p-15 bg-gray white bold">
+    <div class="col-4">
+      <span class="mr-10">Dashboard</span>
+      <span id="toggle" class="cursor teal-hover">
+        &#9776;
+      </span>
+
+    </div>
+    <div class="col-8 right-align">
+      <a class="white" href="/">Home</a>
+    </div>
+  </div>
+  <div id="wrapper" class="row flex">
+    <div id="sidebar-wrapper" class="bg-stone">
+      <ul id="sidebar-list" class="list-reset pl-10">
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/todoapp">Todo App</a>
+        </li>
+        <li>Profile</li>
+        <li>Mobile</li>
+        <li>Settings</li>
+      </ul>
+    </div>
+    <div id="page-content-wrapper" class="border border-2 border-blue">
+      {{{body}}}
+    </div>
+  </div>
+  <script>
+    let $toggle = document.querySelector('#toggle')
+    let $wrapper = document.querySelector('#wrapper')
+
+    $toggle.addEventListener('click', (e) => {
+      $wrapper.classList.toggle('toggled')
+    })
+  </script>
+</body>
+</html>
