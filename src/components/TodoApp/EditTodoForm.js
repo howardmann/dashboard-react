@@ -34,7 +34,7 @@ class EditTodoForm extends Component {
           <input type="checkbox" name="done" checked={this.state.done} onChange={this.handleChecked}/>
           <input type="submit" value="Update"/>
         </form>
-        <button onClick={() => this.props.handleMarkEditUndo(this.props.id)}>Undo Edit</button>
+        <button class="btn p-5 fs-12 bg-gray" onClick={() => this.props.handleMarkEditUndo(this.props.id)}>Undo Edit</button>
       </div>
     )
   }

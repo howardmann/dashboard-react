@@ -43,25 +43,28 @@ class App extends Component {
     return (
       <div>
         <h1>TODOAPP</h1>
-        <NewTodoForm handleNewTodo={this.handleNewTodo}/>
-        
-        {/* Visibility Filter */}
-        <select value={filter} onChange={this.handleFilter}>
-          <option value="SHOW_ALL">SHOW ALL</option>
-          <option value="SHOW_DONE">DONE</option>
-          <option value="SHOW_NOT_DONE">NOT DONE</option>
-        </select>
+        <div className="col-4 phone-col-12">
+          <NewTodoForm handleNewTodo={this.handleNewTodo}/>
+          {/* Visibility Filter */}
+          <select value={filter} onChange={this.handleFilter}>
+            <option value="SHOW_ALL">SHOW ALL</option>
+            <option value="SHOW_DONE">DONE</option>
+            <option value="SHOW_NOT_DONE">NOT DONE</option>
+          </select>
+        </div>
+        <div className="col-8 phone-col-12">
+          <TodoList 
+            todos={todos}
+            editing={editing}
+            handleMarkDone={this.handleMarkDone}
+            handleMarkEdit={this.handleMarkEdit}
+            handleDeleteTodo={this.handleDeleteTodo}
+            handleEditTodo={this.handleEditTodo}
+            handleMarkEditUndo={this.handleMarkEditUndo}
+            filter={filter}
+          />
+        </div>
 
-        <TodoList 
-          todos={todos}
-          editing={editing}
-          handleMarkDone={this.handleMarkDone}
-          handleMarkEdit={this.handleMarkEdit}
-          handleDeleteTodo={this.handleDeleteTodo}
-          handleEditTodo={this.handleEditTodo}
-          handleMarkEditUndo={this.handleMarkEditUndo}
-          filter={filter}
-        />
       </div>
     );
   }

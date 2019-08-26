@@ -9,8 +9,8 @@ const Todo = (props) => (
     </p>
     <input type="checkbox" onChange={() => props.handleMarkDone(props.id)} checked={props.done}/>
     {/* Edit and Delete Buttons */}
-    <button onClick={() => props.handleDeleteTodo(props.id)}>Delete</button>
-    <button onClick={() => props.handleMarkEdit(props.id)}>Edit</button>
+    <button class="btn p-5 fs-12 bg-red" onClick={() => props.handleDeleteTodo(props.id)}>Delete</button>
+    <button class="btn p-5 fs-12 bg-storm" onClick={() => props.handleMarkEdit(props.id)}>Edit</button>
   </div>
 )
 
