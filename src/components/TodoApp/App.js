@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import reducer from './reducers/index'
 import NewTodoForm from './NewTodoForm'
 import TodoList from './TodoList'
-
 class App extends Component {
   constructor(props){
     super(props)
