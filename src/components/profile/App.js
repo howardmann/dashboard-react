@@ -13,6 +13,7 @@ const Form = (props) => (
       Theme: {props.background}
     </p>
     <button onClick={props.handleMarkEdit}>Edit</button>
+    <button className="bg-green" onClick={props.handleSync}>Sync</button>
   </div>
 )
 
@@ -41,16 +42,29 @@ class EditForm extends React.Component {
             onChange={this.props.handleInputChange}
           />
         </p>
-        <p>Age: {getAge(this.state.dob)}</p>
-        <p>Bio: {this.state.bio}</p>
+        <p>Age:</p>
+        <input 
+          type="date"
+          name="dob"
+          value={this.props.dob}
+          onChange={this.props.handleInputChange}
+        />
+        <p>Bio:</p>
+        <textarea 
+          name="bio"
+          cols="30" rows="8"
+          value={this.props.bio}
+          onChange={this.props.handleInputChange}
+        />
         <p>
-          Theme: {this.state.background} 
+          Theme:
           <ColorPicker 
             background={this.props.background}
             handleColorChange={this.props.handleColorChange}
           />
         </p>
-        <button onClick={this.props.handleMarkEdit}>Back</button>
+        <hr/>
+        <button onClick={this.props.handleMarkEdit}>Done</button>
       </div>
     )
   }
@@ -75,7 +89,7 @@ class App extends React.Component {
       bio: 'My name is Felix and I love to eat bananas',
       background: '#F8F89C',
       avatarURL: 'https://www.fillmurray.com/150/150',
-      isEditing: true
+      isEditing: false
     }
   }
   handleColorChange = (hex) => {
@@ -90,6 +104,9 @@ class App extends React.Component {
       [name]: value
     })
   }
+  handleSync = () => {
+    alert('synced')
+  }
   render(){
     return (
       <div>
@@ -97,6 +114,7 @@ class App extends React.Component {
         {!this.state.isEditing 
           ? <Form {...this.state} 
               handleMarkEdit={this.handleMarkEdit}
+              handleSync={this.handleSync}
             />
           : <EditForm {...this.state} 
               handleColorChange={this.handleColorChange} 

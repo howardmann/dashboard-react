@@ -40,7 +40,7 @@ class ColorPicker extends React.Component {
     }
     return (
       <div>
-        <button style={button} onClick={ this.handleClick }>Theme</button>
+        <span className="border border-black px-20 py-2 cursor" style={button} onClick={ this.handleClick }></span>
         { this.state.displayColorPicker && 
           <div style={ popover }>
             <div style={ cover } onClick={ this.handleClose }/>
