@@ -1,12 +1,12 @@
-let buildMakeProfile = function() {
+let buildMakeProfile = function(profileValidator) {
   return ({
     name,
     dob,
     bio,
     theme,
-    avatarURL
+    avatar
   } = {}) => {
-    let {error} = profileValidator({name,dob,bio,theme,avatarURL})
+    let {error} = profileValidator({name,dob,bio,theme,avatar})
     if (error) throw new Error(error)
 
     return {
@@ -14,7 +14,7 @@ let buildMakeProfile = function() {
       getDOB: () => dob,
       getBio: () => bio,
       getTheme: () => theme,
-      getAvatar: () => avatarURL
+      getAvatar: () => avatar
     }
   }
 }

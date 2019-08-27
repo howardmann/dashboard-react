@@ -1,5 +1,5 @@
 let validator = require('../index')
-let profileSchema = require('../../models/profile/profile-schema.js')
+let profileSchema = require('../../profile/profile-schema.js')
 let profileValidator = validator(profileSchema)
 
 describe('profileValidator', () => {
