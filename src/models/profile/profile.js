@@ -3,7 +3,7 @@ let buildMakeProfile = function(profileValidator) {
     name,
     dob,
     bio,
-    theme,
+    theme = '#767676',
     avatar
   } = {}) => {
     let {error} = profileValidator({name,dob,bio,theme,avatar})
