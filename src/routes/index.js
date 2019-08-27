@@ -9,4 +9,8 @@ router.get('/todoapp', (req, res, next) => {
   res.render('todo', {layout: 'dashboard'})
 })
 
+router.get('/profile', (req, res, next) => {
+  res.render('profile', {layout: 'dashboard'})
+})
+
 module.exports = router

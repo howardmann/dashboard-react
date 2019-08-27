@@ -3,7 +3,8 @@ module.exports = {
     helloWorld: './src/components/helloWorld/index.js',
     reactHelloWorld: './src/components/reactHelloWorld/index.js',
     todoApp: './src/components/TodoApp/index.js',
-    colorPicker: './src/components/colorPicker/index.js'
+    colorPicker: './src/components/colorPicker/index.js',
+    profile: './src/components/profile/index.js',
   },
   output: {
     filename: '[name].js',
