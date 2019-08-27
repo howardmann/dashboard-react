@@ -23,3 +23,12 @@ profiles.create = (req, res, next) => {
     })
     .catch(next)
 }
+
+profiles.update = (req, res, next) => {
+  let id = req.params.id
+  profilesDb.updateProfile(id, req.body)
+    .then(data => {
+      res.send(data)
+    })
+    .catch(next)
+}

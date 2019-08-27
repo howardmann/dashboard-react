@@ -2,6 +2,7 @@ let {
   listProfiles,
   findProfile,
   addProfile,
+  updateProfile,
   deleteProfile,
   dropAll
 }
@@ -12,6 +13,7 @@ let profilesDb = {
   listProfiles,
   findProfile,
   addProfile,
+  updateProfile,
   deleteProfile,
   dropAll
 }

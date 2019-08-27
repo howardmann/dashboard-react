@@ -1,6 +1,7 @@
 import React from 'react'
 import getAge from '../../util/getAge'
 import ColorPicker from './ColorPicker.js'
+import axios from 'axios'
 
 const Form = (props) => (
   <div className="col-8 phone-col-12">
@@ -72,7 +73,9 @@ class EditForm extends React.Component {
 
 const Profile = (props) => (
   <div style={{backgroundColor: props.background }} className="col-4 phone-col-12">
-    <h2>Preview Profile</h2>
+    <h2 className={props.isEditing && "bg-blue"}>
+      Preview Profile
+    </h2>
     <img src={props.avatarURL}/>
     <p>Name: {props.name}</p>
     <p>Age: {getAge(props.dob)}</p>
@@ -84,13 +87,26 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      name: 'Felix Mann',
-      dob: '2016-11-05',
-      bio: 'My name is Felix and I love to eat bananas',
+      name: 'Name',
+      dob: 'DOB',
+      bio: 'Bio goes here',
       background: '#F8F89C',
       avatarURL: 'https://www.fillmurray.com/150/150',
       isEditing: false
     }
+  }
+  componentDidMount = () => {
+    axios.get('http://localhost:3000/profiles/1')
+      .then(resp => {
+        let {name, dob, bio, theme, avatar} = resp.data
+        this.setState({
+          name,
+          dob,
+          bio,
+          background: theme,
+          avatarURL: avatar
+        })
+      })
   }
   handleColorChange = (hex) => {
     this.setState({background: hex})
@@ -105,7 +121,17 @@ class App extends React.Component {
     })
   }
   handleSync = () => {
-    alert('synced')
+    let {name, dob, bio, background, avatarURL} = this.state
+    axios.put('http://localhost:3000/profiles/1', {
+      name, dob, bio,
+      theme: background,
+      avatar: avatarURL
+    })
+    .then(resp => {
+      let result = resp.data
+      console.log(result)
+      alert('synced')
+    })
   }
   render(){
     return (

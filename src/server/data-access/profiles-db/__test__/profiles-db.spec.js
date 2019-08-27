@@ -81,6 +81,25 @@ describe('profilesDb', () => {
       .toThrow('avatar must be a string')
   })
 
+  it('updates a profile', async () => {
+    let profiles = await profilesDb.listProfiles()
+    let id = profiles[0].id
+    let profile = await profilesDb.findProfile('id', id)
+
+    let payload = {
+      name: 'NEW NAME WOW'
+    }
+
+    let input = await profilesDb.updateProfile(id, payload)
+    let {name, ...props} = input
+    let actual = {
+      name: payload.name,
+      ...props
+    }
+    expect(input).toEqual(actual)
+  })
+
+
   it('deletes a profile', async () => {
     let profiles = await profilesDb.listProfiles()
     let id = profiles[0].id.toString()

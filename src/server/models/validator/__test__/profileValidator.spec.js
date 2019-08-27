@@ -12,7 +12,6 @@ describe('profileValidator', () => {
       avatar: 'http://www.example.com'
     }
     let input = profileValidator(validPayload)
-    console.log(input);
     let actual = true
     expect(input).toBe(actual)
   })

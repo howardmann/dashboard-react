@@ -18,6 +18,7 @@ router.get('/profile', (req, res, next) => {
 router
   .get('/profiles', profiles.index)
   .get('/profiles/:id', profiles.show)
+  .put('/profiles/:id', profiles.update)
   .post('/profiles', profiles.create)
 
 module.exports = router

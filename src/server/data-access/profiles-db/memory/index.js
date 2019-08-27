@@ -25,6 +25,16 @@ let addProfile = (profileInfo) => {
   return findProfile('id', newProfile.id)
 }
 
+let updateProfile = async (id, payload) => {
+  let profile = await findProfile('id', id)
+  let newProfile = {...profile, ...payload} 
+  let NEW_PROFILES = PROFILES.map(el => {
+    return el.id == profile.id ? newProfile : el 
+  })
+  PROFILES = NEW_PROFILES
+  return findProfile('id', id)
+}
+
 let deleteProfile = (id) => {
   return findProfile('id', id)
     .then(profile => {
@@ -50,6 +60,7 @@ let dropAll = () => {
 module.exports = {
   listProfiles,
   findProfile,
+  updateProfile,
   addProfile,
   deleteProfile,
   dropAll
