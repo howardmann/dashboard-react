@@ -19,16 +19,16 @@ app.use(bodyParser.json())
 // view engine setup
 app.engine('.hbs', exphbs({
   extname: '.hbs',
-  partialsDir: path.join(__dirname, '../components/')
+  partialsDir: path.join(__dirname, '/components/')
 }))
-app.set('views', __dirname + '/views')
+app.set('views', __dirname + '/server/views')
 app.set('view engine', '.hbs')
 
 // Serve static files from public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Require routes
-app.use(require('./routes'))
+app.use(require('./server/routes'))
 
 // Custom 404 route not found handler
 app.use((req, res) => {
