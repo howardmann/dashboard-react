@@ -1,4 +1,14 @@
 <form action='/cloudinary' method="post" enctype="multipart/form-data">
-  <input type='file' name='image' />
+  <input type='file' name='image' onchange="previewImage(event)" />
   <input type="submit">
 </form>
+
+<img id="output_image" style="max-width: 300px">
+
+<script>
+  let previewImage = (e) => {
+    let file = URL.createObjectURL(e.target.files[0])
+    let $img = document.querySelector('#output_image') 
+    $img.src = file
+  }
+</script>

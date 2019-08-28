@@ -1,9 +1,16 @@
 let cloudinary = module.exports = {}
 
+let env = require('../../config')
 let {multerUploads,dataUri} = require('../middlewares/multer.js')
-let {uploader, cloudinaryConfig} = require('../config/cloudinaryConfig')
+let { uploader, config } = require('cloudinary').v2;
 
-cloudinary.config = cloudinaryConfig
+// Middlewares config
+config({
+  cloud_name: env.CLOUDINARY_CLOUD_NAME,
+  api_key: env.CLOUDINARY_API_KEY,
+  api_secret: env.CLOUDINARY_API_SECRET,
+});
+
 cloudinary.multerUploads = multerUploads
 
 cloudinary.show = (req, res, next) => {
