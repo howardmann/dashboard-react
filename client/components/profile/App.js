@@ -6,7 +6,7 @@ import axios from 'axios'
 const Form = (props) => (
   <div className="col-8 phone-col-12">
     <h2>Form</h2>
-    <img src={props.avatarURL}/>
+    <img width="250" src={props.avatarURL}/>
     <p>Name: {props.name}</p>
     <p>DOB: {props.dob}</p>
     <p>Bio: {props.bio}</p>
@@ -33,7 +33,7 @@ class EditForm extends React.Component {
     return (
       <div className="col-8 phone-col-12">
         <h2>Edit Profile</h2>
-        <img src={this.state.avatarURL}/>
+        <img width="250" src={this.state.avatarURL}/>
         <p>
           Name: 
           <input 
@@ -64,6 +64,13 @@ class EditForm extends React.Component {
             handleColorChange={this.props.handleColorChange}
           />
         </p>
+        <p>
+          Profile:
+          <input 
+            type="file"
+            onChange={this.props.handleImagePreview}
+          />
+        </p>
         <hr/>
         <button onClick={this.props.handleMarkEdit}>Done</button>
       </div>
@@ -76,7 +83,7 @@ const Profile = (props) => (
     <h2 className={props.isEditing && "bg-blue"}>
       Preview Profile
     </h2>
-    <img src={props.avatarURL}/>
+    <img width="250" src={props.avatarURL}/>
     <p>Name: {props.name}</p>
     <p>Age: {getAge(props.dob)}</p>
     <p>Bio: {props.bio}</p>
@@ -92,7 +99,7 @@ class App extends React.Component {
       bio: 'Bio goes here',
       background: '#F8F89C',
       avatarURL: 'https://www.fillmurray.com/150/150',
-      isEditing: false
+      isEditing: true
     }
   }
   componentDidMount = () => {
@@ -133,6 +140,11 @@ class App extends React.Component {
       alert('synced')
     })
   }
+  handleImagePreview = (e) => {
+    this.setState({
+      avatarURL: URL.createObjectURL(e.target.files[0])
+    })
+  }
   render(){
     return (
       <div>
@@ -146,6 +158,7 @@ class App extends React.Component {
               handleColorChange={this.handleColorChange} 
               handleInputChange={this.handleInputChange}
               handleMarkEdit={this.handleMarkEdit}
+              handleImagePreview={this.handleImagePreview}
             />
         }                
         <Profile {...this.state}/>
