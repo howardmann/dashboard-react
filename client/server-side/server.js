@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 // view engine setup
 app.engine('.hbs', exphbs({
   extname: '.hbs',
-  partialsDir: __dirname + '/components/'
+  partialsDir: path.join(__dirname, '../components/')
 }))
 app.set('views', __dirname + '/views')
 app.set('view engine', '.hbs')
