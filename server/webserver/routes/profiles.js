@@ -1,4 +1,4 @@
-let profilesDb = require('../server/data-access/profiles-db')
+let profilesDb = require('../../data-access/profiles-db')
 
 let profiles = module.exports = {}
 

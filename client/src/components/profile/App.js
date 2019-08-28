@@ -96,7 +96,7 @@ class App extends React.Component {
     }
   }
   componentDidMount = () => {
-    axios.get('http://localhost:3000/profiles/1')
+    axios.get('http://localhost:8080/profiles/1')
       .then(resp => {
         let {name, dob, bio, theme, avatar} = resp.data
         this.setState({
@@ -122,7 +122,7 @@ class App extends React.Component {
   }
   handleSync = () => {
     let {name, dob, bio, background, avatarURL} = this.state
-    axios.put('http://localhost:3000/profiles/1', {
+    axios.put('http://localhost:8080/profiles/1', {
       name, dob, bio,
       theme: background,
       avatar: avatarURL
