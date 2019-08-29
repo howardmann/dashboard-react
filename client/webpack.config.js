@@ -1,7 +1,5 @@
 module.exports = {
   entry: {
-    helloWorld: './components/helloWorld/index.js',
-    reactHelloWorld: './components/reactHelloWorld/index.js',
     todoApp: './components/TodoApp/index.js',
     colorPicker: './components/colorPicker/index.js',
     profile: './components/profile/index.js',

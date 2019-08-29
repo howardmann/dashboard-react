@@ -1,94 +1,12 @@
 import React from 'react'
-import getAge from '../../util/getAge'
-import ColorPicker from './ColorPicker.js'
 import axios from 'axios'
 
-const Form = (props) => (
-  <div className="col-8 phone-col-12">
-    <h2>Form</h2>
-    <img width="250" src={props.avatarURL}/>
-    <p>Name: {props.name}</p>
-    <p>DOB: {props.dob}</p>
-    <p>Bio: {props.bio}</p>
-    <p>
-      Theme: {props.background}
-    </p>
-    <button onClick={props.handleMarkEdit}>Edit</button>
-    <button className="bg-green" onClick={props.handleSync}>Sync</button>
-  </div>
-)
+import Form from './Form.js'
+import EditForm from './EditForm.js'
+import Profile from './Profile.js'
 
-
-class EditForm extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      name: this.props.name,
-      dob: this.props.dob,
-      bio: this.props.bio,
-      theme: this.props.background
-    }
-  }
-  render(){
-    return (
-      <div className="col-8 phone-col-12">
-        <h2>Edit Profile</h2>
-        <img width="250" src={this.state.avatarURL}/>
-        <p>
-          Name: 
-          <input 
-            type="text"
-            name="name"
-            value={this.props.name}
-            onChange={this.props.handleInputChange}
-          />
-        </p>
-        <p>Age:</p>
-        <input 
-          type="date"
-          name="dob"
-          value={this.props.dob}
-          onChange={this.props.handleInputChange}
-        />
-        <p>Bio:</p>
-        <textarea 
-          name="bio"
-          cols="30" rows="8"
-          value={this.props.bio}
-          onChange={this.props.handleInputChange}
-        />
-        <p>
-          Theme:
-          <ColorPicker 
-            background={this.props.background}
-            handleColorChange={this.props.handleColorChange}
-          />
-        </p>
-        <p>
-          Profile:
-          <input 
-            type="file"
-            onChange={this.props.handleImagePreview}
-          />
-        </p>
-        <hr/>
-        <button onClick={this.props.handleMarkEdit}>Done</button>
-      </div>
-    )
-  }
-}
-
-const Profile = (props) => (
-  <div style={{backgroundColor: props.background }} className="col-4 phone-col-12">
-    <h2 className={props.isEditing && "bg-blue"}>
-      Preview Profile
-    </h2>
-    <img width="250" src={props.avatarURL}/>
-    <p>Name: {props.name}</p>
-    <p>Age: {getAge(props.dob)}</p>
-    <p>Bio: {props.bio}</p>
-  </div>
-)
+import updateProfile from './util/updateProfile'
+import uploadFile from './util/uploadFile'
 
 class App extends React.Component {
   constructor(props){
@@ -99,6 +17,7 @@ class App extends React.Component {
       bio: 'Bio goes here',
       background: '#F8F89C',
       avatarURL: 'https://www.fillmurray.com/150/150',
+      file: null,
       isEditing: true
     }
   }
@@ -128,21 +47,22 @@ class App extends React.Component {
     })
   }
   handleSync = () => {
-    let {name, dob, bio, background, avatarURL} = this.state
-    axios.put('http://localhost:8080/profiles/1', {
-      name, dob, bio,
-      theme: background,
-      avatar: avatarURL
-    })
-    .then(resp => {
-      let result = resp.data
-      console.log(result)
-      alert('synced')
-    })
+    let {name, dob, bio, background, file} = this.state
+    
+    if(!file){
+      return updateProfile({name, dob, bio, background})
+    }
+    uploadFile(file)
+      .then(avatarURL => {
+        return updateProfile({name, dob, bio, background, avatarURL})
+      })
   }
   handleImagePreview = (e) => {
+    let file = e.target.files[0]
+    let avatarURL = URL.createObjectURL(file)
     this.setState({
-      avatarURL: URL.createObjectURL(e.target.files[0])
+      file,
+      avatarURL
     })
   }
   render(){
